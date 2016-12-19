@@ -1,0 +1,119 @@
+
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}
+.header-profile-image {
+  opacity: 0.8;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+  opacity: 1;
+}
+.user-header-dropdown-toggle {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
+
+.theme-dark-header {
+  background-color: #1b1b1b !important;
+  color:white !important;
+}
+
+.theme-dark-header-toolbar{
+  background-color: #212121 !important;
+  color:white !important;
+}
+
+.theme-dark-content{
+  background: #393939 !important;
+}
+
+.theme-dark-content md-card{
+  background-color: #1b1b1b !important;
+  color:white;
+}
+
+.theme-dark-text{
+  color:white !important;
+}
+
+.mdCardDark *{
+  color:white;
+}
+.mdl-badge.mdl-badge--no-background[data-badge]:after{
+  color:white !important;
+  opacity: 0.5;
+}
+
+.mdCardDark{
+  background-color: #171717 !important;
+  color: white !important;
+}
+
+/*
+ * scroll chrome
+ */
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #545454;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #b62828;
+}
+
+/* ==================================== */
+
+.credits{
+  padding-top: 20px;
+  font-size: 1.1em;
+}
+
+.width95{
+  width: 95%!important;
+  margin: auto;
+}
+
+.textRigth{
+  text-align: right;
+}
+
+*{
+  outline: none;
+}
+
+.md-datepicker-open .md-datepicker-calendar-icon {
+  fill: #2da3ca;
+}
+
+.marginAuto{
+  margin: auto;
+}

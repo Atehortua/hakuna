@@ -1,0 +1,248 @@
+<div data-ng-controller="HomeController as ul" class="theme-dark-content theme-dark-text">
+  <div layout="column">
+
+    <div flex="100" style="height: 100px">
+      <div flex="100" class="parallax-img" layout="column" layout-align="end end" layout-padding>
+        <span class="pull-right change-parralax"><md-icon class="material-icons">photo_camera</md-icon></span>
+      </div>
+    </div>
+
+    <div layout="row" layout-sm="column" layout-xs="column" flex="100">
+      <div flex="50" flex-sm="100" flex-xs="100" layout="row" layout-xs="column">
+        <div flex="50" flex-xs="100">
+          <md-card class="box md-whiteframe-5dp">
+            <md-card-title class="tituloCard" layout="column">
+              <span>
+                <md-icon class="material-icons space-right">trending_up</md-icon><span>Financial</span>
+                <md-icon class="material-icons pull-right add-financial">add_box</md-icon>
+              </span>
+            </md-card-title>
+          </md-card>
+        </div>
+        <div  flex="50" flex-xs="100">
+          <md-card class="box md-whiteframe-5dp">
+            <md-card-title class="tituloCard" layout="column">
+              <span>
+                <md-icon class="material-icons space-right">note</md-icon><span>Recordatorio</span>
+                <md-icon class="material-icons pull-right add-recordatorio">add_box</md-icon>
+              </span>
+            </md-card-title>
+          </md-card>
+        </div>
+      </div>
+      <div flex="50" flex-sm="100" flex-xs="100" layout="row" layout-xs="column">
+        <!-- book -->
+        <div flex="50" flex-xs="100" id="book">
+          <md-card class="box md-whiteframe-5dp">
+            <md-card-title class="tituloCard mdCardDark" layout="column">
+              <span>
+                <md-icon class="material-icons space-right">import_contacts</md-icon><span>Book</span>
+                <md-icon class="material-icons pull-right add-book" ng-click="showBook($event,'','add')">add_box</md-icon>
+              </span>
+            </md-card-title>
+            <md-card-content class="card-scroll">
+              <div ng-repeat="book in books | orderBy:'create' track by $index">
+                <md-card ng-show="book.visible" class="card-book md-whiteframe-5dp">
+                  <md-card-title class="mdCardTitle" layout="column">
+                    <span>
+                      <strong>{{book.asunto}}</strong>
+                      <span>
+                        <md-icon class="material-icons pull-right crud" ng-click=""><md-tooltip md-direction="top">Eliminar Hoja</md-tooltip>delete</md-icon>
+                        <md-icon class="material-icons pull-right crud" ng-click=""><md-tooltip md-direction="top">Editar Hoja</md-tooltip>create</md-icon>
+                      </span>
+                    </span>
+                  </md-card-title>
+                  <div class="width95"><md-divider class="mdDivider"></md-divider></div>
+                  <md-card-content class="contentPage" ng-click="showBook($event,book)">
+                    <span>{{book.contenido}}</span>
+                  </md-card-content>
+                  <md-card-actions layout="column" layout-aling="end end">
+                      <span>
+                        <span class="pull-right text-grey">{{book.create}}</span>
+                      </span>
+                  </md-card-actions>
+                </md-card>
+              </div>
+            </md-card-content>
+            <md-card-footer class="mdCardDark" layout="row"  layout-align="space-around center">
+              <span><md-tooltip md-direction="bottom"># Favoritos</md-tooltip><md-icon class="material-icons">description</md-icon> {{getFavoriteLinks()}}</span>
+            </md-card-footer>
+          </md-card>
+        </div>
+        <!-- links -->
+        <div flex="50" layout="column" flex-xs="100" id="links">
+          <div flex="100">
+            <md-card class="mini-box1 md-whiteframe-5dp">
+              <md-card-title class="tituloCard mdCardDark" layout="column">
+                <span>
+                  <md-icon class="material-icons space-right">attach_file</md-icon><span class="mdl-badge mdl-badge--no-background" data-badge="{{links.length}}">Links</span>
+                  <md-icon class="material-icons pull-right add-links" ng-click="showFormu($event,'add')">
+                    <md-tooltip md-direction="top">Agregar links</md-tooltip>add_box
+                  </md-icon>
+                  <md-icon ng-click="filterLinks = !filterLinks" ng-class="{'add-links-active':filterLinks}" class="material-icons pull-right add-links">
+                    <md-tooltip md-direction="top">Filtrar links</md-tooltip>filter_list
+                  </md-icon>
+                </span>
+              </md-card-title>
+              <md-card-content ng-show="filterLinks" md-theme="docs-dark" class="md-whiteframe-4dp mdCardDark">
+                <md-input-container class="md-block" flex-gt-sm>
+                  <md-icon class="material-icons">search</md-icon>
+                  <input ng-keyUp="filtrarLinks()" ng-model="filtroLinks" type="text">
+                </md-input-container>
+                <span layout="row">
+                  <md-icon ng-click="filtroCategortia('estudio')" class="icoEstu" ng-class="{'icoActivo':filtroCatego['estudio']}"></md-icon><md-icon ng-click="filtroCategortia('redes')" class="icoRedes" ng-class="{'icoActivo':filtroCatego['redes']}"></md-icon>
+                  <md-icon ng-click="filtroCategortia('entretenimiento')" class="icoEntre"  ng-class="{'icoActivo':filtroCatego['entretenimiento']}"></md-icon><md-icon ng-click="filtroCategortia('ocio')" class="icoOcio"  ng-class="{'icoActivo':filtroCatego['ocio']}"></md-icon>
+                  <md-icon ng-click="filtroCategortia('otros')" class="icoOtros"  ng-class="{'icoActivo':filtroCatego['otros']}"></md-icon><md-icon ng-click="filtroCategortia('favorito')" class="icoStar"  ng-class="{'icoActivo':filtroCatego['favorito']}">star</md-icon>
+                </span>
+              </md-card-content>
+              <md-card-content class="card-scroll mdContentLinks">
+                <div ng-repeat="link in links  | orderBy:'name' track by $index ">
+                  <md-card ng-show="link.visible" class="card-links md-whiteframe-5dp" ng-class="link.categoria">
+                    <md-card-title class="mdCardTitle" layout="column">
+                      <span>
+                        <md-icon class="iconoCategoria"></md-icon>
+                        <a target="_blank" ng-href="{{link.link}}" class="text" ><md-tooltip md-direction="top">{{link.link}}</md-tooltip>{{link.name}}</a>
+                        <md-icon class="material-icons pull-right crud" ng-click="deleteLink(link._id)"><md-tooltip md-direction="top">Eliminar link</md-tooltip>delete</md-icon>
+                        <md-icon class="material-icons pull-right crud" ng-click="showFormu($event,'update',link)"><md-tooltip md-direction="top">Editar link</md-tooltip>create</md-icon>
+                        <md-icon ng-if="!link.favorito" class="material-icons pull-right crud favorito" ng-click="favoritoLink(link,true)"><md-tooltip md-direction="top">Favorito</md-tooltip>star_border</md-icon>
+                        <md-icon ng-if="link.favorito" class="material-icons pull-right favorito-activo" ng-click="favoritoLink(link,false)"><md-tooltip md-direction="top">Favorito</md-tooltip>star</md-icon>
+                      </span>
+                    </md-card-title>
+                  </md-card>
+                </div>
+              </md-card-content>
+              <md-card-footer class="mdCardDark" layout="row"  layout-align="space-around center">
+                <span><md-tooltip md-direction="bottom"># Favoritos</md-tooltip><md-icon class="material-icons">star</md-icon> {{getFavoriteLinks()}}</span>
+                <span><md-tooltip md-direction="bottom"># Visibles</md-tooltip><md-icon class="material-icons">visibility</md-icon> {{getVisibleLinks()}}</span>
+                <span><md-tooltip md-direction="bottom"># Categorias</md-tooltip><md-icon class="material-icons">filter</md-icon> {{getCategoriaLinks()}}</span>
+              </md-card-footer>
+            </md-card>
+          </div>
+          <div flex="100">
+            <md-card class="mini-box2 md-whiteframe-5dp">
+              <md-card-title class="tituloCard" layout="column">
+                <span>
+                  <md-icon class="material-icons space-right">dialpad</md-icon><span>Codigos</span>
+                  <md-icon class="material-icons pull-right add-codigos">add_box</md-icon>
+                </span>
+              </md-card-title>
+            </md-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- formulario de links -->
+<script type="text/ng-template" id="formulario-links.tmpl.html">
+  <md-dialog aria-label="Mango (Fruit)"  class="sizeDialogo" ng-cloak>
+    <form ng-submit="agregarLink(newLink)">
+      <md-toolbar class="theme-dark-header md-whiteframe-5dp">
+        <div class="md-toolbar-tools">
+          <h2  ng-show="accionFormu === 'add'">Agregar</h2>
+          <h2  ng-show="accionFormu === 'update'">Actualizar</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon class="material-icons" aria-label="Close dialog">clear</md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content class="theme-dark-content theme-dark-text" >
+        <div class="md-dialog-content" md-theme="docs-dark">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Titulo</label>
+            <input ng-model="newLink.name" md-maxlength="20" required>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>URL</label>
+            <input ng-model="newLink.link" required>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Categorias</label>
+            <md-select ng-model="newLink.categoria">
+              <md-option ng-repeat="catego in categoLinks track by $index" value="{{catego}}">
+                <span class="capitalize">{{catego}}</span>
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <br>
+        <md-divider></md-divider>
+        <div layout="row"  layout-align="space-around end" class="mdCardDark">
+          <md-button class="md_raised cancel" ng-click="cancel()">
+            cancelar
+          </md-button>
+          <md-button ng-show="accionFormu === 'add'" class="md_raised aceptar" type="submit">
+            agregar
+          </md-button>
+          <md-button ng-show="accionFormu === 'update'" class="md_raised aceptar" type="submit">
+            actualizar
+          </md-button>
+        </div>
+      </md-dialog-content>
+
+    </form>
+  </md-dialog>
+</script>
+
+<!-- partial de book -->
+<script type="text/ng-template" id="book.tmpl.html">
+  <md-dialog aria-label="Mango (Fruit)"  class="sizeDialogoBook" ng-cloak>
+    <md-toolbar class="theme-dark-header-toolbar md-whiteframe-5dp">
+      <div class="md-toolbar-tools">
+        <h2>Book</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons" aria-label="Close dialog">clear</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content class="theme-dark-content theme-dark-text bookSize">
+      <div layout="row" flex>
+        <div  flex="25" layout="column">
+          <ul class="sidebar-nav">
+            <li ng-repeat="page in books |orderBy:'create' track by $index" ng-click="getContenido(page)">{{page.create}}</li>
+          </ul>
+        </div>
+        <div flex="75" ng-show="!accionBook" layout="column" layout-padding class="contenidoBook">
+          <div >
+            <h3>{{contenido.asunto}}</h3>
+            <p>{{contenido.contenido}}</p>
+            <h6 class="textRigth">{{contenido.create}}</h6>
+          </div>
+        </div>
+        <form ng-show="accionBook === 'add'"  flex="75" layout-padding  layout="column" ng-submit="">
+            <div md-theme="docs-dark" layout="column" class="contenidoBook">
+                <h4 class="text-center">Agregar pagina</h4>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <md-icon>face</md-icon>
+                  <label>Asunto</label>
+                  <input ng-model="newBook.asunto" required>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <md-icon>subject</md-icon>
+                  <label>Contenido</label>
+                  <textarea  ng-model="newBook.contenido" md-maxlength="200" rows="1" md-select-on-focus></textarea>
+                </md-input-container>
+                <div class="marginAuto">
+                  <md-datepicker flex="30" ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                </div>
+
+              <div layout="row"  layout-align="space-around end" class="mdCardDark" style="margin-top: 70px">
+                <md-button class="cancel" ng-click="cancel()">
+                  cancelar
+                </md-button>
+                <md-button class="aceptar" type="submit">
+                  agregar
+                </md-button>
+              </div>
+          </div>
+        </form>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+</script>
